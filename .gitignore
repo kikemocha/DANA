@@ -1,0 +1,83 @@
+# Ignorar archivos compilados por Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Ignorar configuraciones y entornos virtuales
+env/
+venv/
+*.env
+*.venv
+.Python
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Ignorar archivos y directorios de Django
+*.log
+*.pot
+*.pyc
+*.pyo
+*.sqlite3
+*.db
+*.db-journal
+
+# Ignorar configuraciones y archivos sensibles
+config/settings/local.py
+config/.env
+config/.env.*
+
+# Ignorar dependencias y distribuciones
+node_modules/
+bower_components/
+*.log
+*.lock
+yarn-debug.log*
+yarn-error.log*
+
+# Archivos de caché para múltiples sistemas operativos
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Archivos de cobertura y pruebas
+htmlcov/
+.coverage
+.coverage.*
+.cache
+.tox/
+.nox/
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+
+# Ignorar archivos de frontend
+*.map
+*.min.*
+dist/
+build/
+public/
+staticfiles/
+static/
+media/
+
+# Ignorar archivos de paquetes y distribuciones
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+parts/
+var/
+sdist/
+wheels/
+*.manifest
+*.spec
+*.snap
+*.snap~
+
+# Archivos de docker (si usas Docker)
+*.pid
+docker-compose.override.yml
