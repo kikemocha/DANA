@@ -8,12 +8,13 @@ const RegisterPage: React.FC = () =>{
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
-    
-    const [nickname, setNickname] = useState('');
+    const [nif, setNif] = useState('');
     const [name, setName] = useState('');
     const [surname, setSurname] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
+
+
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     
@@ -70,12 +71,12 @@ const RegisterPage: React.FC = () =>{
     
         const requestBody = {
             'email': email,
-            'nickname': nickname,
             'first_name': name,
             'last_name': surname,
+            'NIF': nif,
             'phone_number': phone,
             'password': password,
-        };
+        };  
     
         // Validación de la contraseña
         if (password.length < 8 || !/\d/.test(password) || !/[A-Z]/.test(password) || !/[a-z]/.test(password) || !/[()@#$%!/.\-_]/.test(password)) {
@@ -140,7 +141,7 @@ const RegisterPage: React.FC = () =>{
             <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
                 <Link to="/" className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
                     <img className="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo"/>
-                    Flowbite    
+                    DANA
                 </Link>
                 <div className="w-full lg:w-3/4 bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-3xl xl:p-0 dark:bg-gray-800 dark:border-gray-700 relative">
                     {loading && (
@@ -159,30 +160,34 @@ const RegisterPage: React.FC = () =>{
                     <div className="p-6 space-y-4 md:space-y-6 sm:p-8 ">
                     
                         <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                            Create an account
+                            Crear una cuenta
                         </h1>
                         <form className="space-y-4 md:space-y-6" method="POST" onSubmit={(e) => {handleFormSubmit(e)}}>
-                            <div>
-                                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nickname</label>
-                                <input type="text" name="nickname" onChange={ (e) => {setNickname(e.target.value)}} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none" placeholder="elonmusk" required={true} />
-                            </div>
                             <div className="grid md:grid-cols-2 md:gap-6">
                                 <div>
-                                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
+                                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre</label>
                                     <input type="text" name="name" onChange={ (e) => {setName(e.target.value)}} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none" placeholder="Elon" required={true} />
                                 </div>
                                 <div>
-                                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Surname</label>
+                                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Apellido</label>
                                     <input type="text" name="surname" onChange={ (e) => {setSurname(e.target.value)}} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none" placeholder="Musk" required={true} />
                                 </div>
                             </div>
                             <div className="grid md:grid-cols-2 md:gap-6">
                                 <div>
-                                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
+                                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NIF</label>
+                                    <input type="text" name="name" onChange={ (e) => {setNif(e.target.value)}} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none" placeholder="01010101X" required={true} />
+                                </div>
+                                <div>
+                                </div>
+                            </div>
+                            <div className="grid md:grid-cols-2 md:gap-6">
+                                <div>
+                                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">email</label>
                                     <input type="email" name="email" onChange={ (e) => {setEmail(e.target.value)}} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none" placeholder="name@company.com" required={true} />
                                 </div>
                                 <div>
-                                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your phone</label>
+                                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Teléfono</label>
                                     <div>
                                         <div className="flex">
                                             <button onClick={() => {setShowCountryPopUp(true)}} className="flex-shrink-0 w-32 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-500 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-0 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600" type="button">
@@ -228,22 +233,22 @@ const RegisterPage: React.FC = () =>{
                                 </div>
                             </div>
                             <div>
-                                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contraseña</label>
                                 <input type="password" name="password" onClick={()=>{setShowPasswordCheck(true)}} onChange={ (e) => {setPassword(e.target.value)}} placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none" required={true}/>
                             </div>
                             {showPasswordCheck && (
                                 <div>
                                     <ul>
-                                        <li className={ password.length < 8 && password.length > 0 ? 'text-red-500' : password.length >= 8 ? 'text-green-500' : 'text-white'}>At least 8 caracteres</li>
-                                        <li className={password.length === 0 ? 'text-white' : /\d/.test(password) ? 'text-green-500' : 'text-red-500'}>At least one number</li>
-                                        <li className={password.length === 0 ? 'text-white' : /[A-Z]/.test(password) ? 'text-green-500' : 'text-red-500'}>At least one Uppercase</li>
-                                        <li className={password.length === 0 ? 'text-white' : /[a-z]/.test(password) ? 'text-green-500' : 'text-red-500'}>At least one lowecase</li>
-                                        <li className={password.length === 0 ? 'text-white' : /[()@#$%!/.\-_]/.test(password) ? 'text-green-500' : 'text-red-500'}>At least one special caracter ()*@#$%!.-_</li>
+                                        <li className={password.length < 8 && password.length > 0 ? 'text-red-500' : password.length >= 8 ? 'text-green-500' : 'text-white'}>Al menos 8 caracteres</li>
+                                        <li className={password.length === 0 ? 'text-white' : /\d/.test(password) ? 'text-green-500' : 'text-red-500'}>Al menos un número</li>
+                                        <li className={password.length === 0 ? 'text-white' : /[A-Z]/.test(password) ? 'text-green-500' : 'text-red-500'}>Al menos una mayúsucula</li>
+                                        <li className={password.length === 0 ? 'text-white' : /[a-z]/.test(password) ? 'text-green-500' : 'text-red-500'}>Al menos una minúscula</li>
+                                        <li className={password.length === 0 ? 'text-white' : /[()@#$%!/.\-_]/.test(password) ? 'text-green-500' : 'text-red-500'}>Al menos un caracter especial ()*@#$%!.-_</li>
                                     </ul>
                                 </div>
                             )}
                             <div>
-                                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm password</label>
+                                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirmar contraseña</label>
                                 <input type="password" name="confirm-password" onChange={ (e) => {setConfirmPassword(e.target.value)}} placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none" required={true} />
                             </div>
                             <div className="flex items-start">
@@ -251,15 +256,15 @@ const RegisterPage: React.FC = () =>{
                                     <input id="terms" aria-describedby="terms" type="checkbox" className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" required={true} />
                                 </div>
                                 <div className="ml-3 text-sm">
-                                    <label className="font-light text-gray-500 dark:text-gray-300">I accept the <a className="font-medium text-primary-600 hover:underline dark:text-primary-500" href="#">Terms and Conditions</a></label>
+                                    <label className="font-light text-gray-500 dark:text-gray-300">Acepto los <a className="font-medium text-primary-600 hover:underline dark:text-primary-500" href="#">Términos y condiciones</a></label>
                                 </div>
                             </div>
                             <div className="flex flex-col">
-                                <button type="submit" className="w-2/3 mx-auto text-black bg-white hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Create an account</button>
+                                <button type="submit" className="w-2/3 mx-auto text-black bg-white hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Crear una Cuenta</button>
                                 <p className="text-red-500 mx-auto mt-2">{error}</p>
                             </div>
                             <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                                Already have an account? <Link to="/login" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Login here</Link>
+                                ¿Ya tienes una cuenta? <Link to="/login" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Inicia sesión aquí</Link>
                             </p>
                         </form>
                     </div>

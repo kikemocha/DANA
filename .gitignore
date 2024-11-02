@@ -58,7 +58,6 @@ coverage.xml
 *.min.*
 dist/
 build/
-public/
 staticfiles/
 static/
 media/
