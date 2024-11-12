@@ -10,6 +10,9 @@ from .serializers import UserSerializer
 from django.contrib.auth import get_user_model
 from rest_framework.permissions import AllowAny
 
+from rest_framework_simplejwt.views import TokenObtainPairView
+from .serializers import CustomTokenObtainPairSerializer
+
 # Importar el modelo de usuario personalizado
 User = get_user_model()
 
@@ -27,3 +30,7 @@ class UserDetailView(APIView):
         user = request.user                 # Django valida el token y guarda el usuario en request.user
         serializer = UserSerializer(user)   # Convertimos los datos a json
         return Response(serializer.data)    # Devolvemos los datos serializados
+    
+
+class CustomTokenObtainPairView(TokenObtainPairView):
+    serializer_class = CustomTokenObtainPairSerializer

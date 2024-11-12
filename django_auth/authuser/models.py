@@ -25,17 +25,17 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_('email address'), unique=True)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
-    NIF = models.CharField(max_length=255)
-    location = models.CharField(max_length=255)
+    NIF = models.CharField(max_length=255, unique=True, null=False)
     phone_number = models.CharField(max_length=15, blank=True, null=True)
     img = models.ImageField(upload_to='profile_images/', null=True, blank=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+    data_exist = models.BooleanField(default=False)  # Añadido el campo con valor predeterminado False
 
     objects = CustomUserManager()
 
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['nickname', 'first_name', 'last_name']
+    USERNAME_FIELD = 'NIF'
+    REQUIRED_FIELDS = ['first_name', 'last_name', 'email']
 
     def __str__(self):
         return self.email
