@@ -19,11 +19,10 @@ const LoginPage: React.FC = () =>{
         setLoading(true);
     
         const requestBody = {
-            'nif': nif,
+            'NIF': nif,
             'password': password,
         };
         try {
-            console.log(requestBody);
             // Hacer la solicitud POST
             const response = await axios.post('http://localhost:8000/auth/login/', requestBody, {
                 headers: {
@@ -34,7 +33,6 @@ const LoginPage: React.FC = () =>{
     
             if (response.status === 200) {
                 const { access, refresh } = response.data;
-                authContext.login(access, refresh);
                 const UserDataResponse = await axios.get('http://localhost:8000/auth/getUserData/',
                     {
                         headers: {
@@ -43,14 +41,20 @@ const LoginPage: React.FC = () =>{
                     }
                 )
                 if (UserDataResponse.status === 200) {
+                    const userData = UserDataResponse.data;
+
+                    // Llamar a `login` con access, refresh y userData después de obtener los datos del usuario
+                    authContext.login(access, refresh, userData);
+                    
                     // Guardar los datos del usuario en el contexto
-                    authContext.setUserData(UserDataResponse.data);
+                    authContext.setUserData(userData);
+
+                    setLoading(false);
+                    navigate('/'); // Redirigir al home
+                } else {
+                    setError('Error al obtener los datos del usuario');
+                    setLoading(false);
                 }
-                setLoading(false);
-                navigate('/');  // Redirigir al home
-            } else{
-                setLoading(false);
-                setError('Incorrect User or Password');
             }
         } catch (error: any) {
             if (error.response) {
@@ -96,17 +100,18 @@ const LoginPage: React.FC = () =>{
                                             <label className="text-gray-500 dark:text-gray-300">Recuerdame</label>
                                         </div>
                                     </div>
-                                    <a href="#" className="text-white text-sm font-medium text-primary-600 hover:underline">Te olvidas?</a>
+                                    <p className="text-white text-sm font-medium text-primary-600 hover:underline">¿Te has olvidado de la contraseña?</p>
                                 </div>
                                 <div className="py-4 flex flex-col">
                                     <button type="submit" className="w-2/3 mx-auto text-black bg-white hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign in</button>
                                     <p className="text-red-500 mx-auto mt-2">{error}</p>
                                 </div>
-                                <Link to='/register'>
                                     <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                                        ¿No tienes todavía una cuenta? <a href="#" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Registrate</a>
+                                        ¿No tienes todavía una cuenta? 
+                                        <Link to='/register'>
+                                            <p className="font-medium text-primary-600 hover:underline dark:text-primary-500">Registrate</p>
+                                        </Link>
                                     </p>
-                                </Link>
                             </form>
                         </div>
                     </div>

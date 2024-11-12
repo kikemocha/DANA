@@ -1,11 +1,42 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "./components/Navbar";
+import { Link } from "react-router-dom";
+import { useAuth } from "./context/AuthContext";
 
 const HomePage: React.FC = () =>{
-
+    const {userData, isAuthenticated} = useAuth();
+    const [showPopUp, setShowPopUp] = useState(true);
+    useEffect(()=>{
+        if (userData?.data_exist === true){
+            setShowPopUp(false);
+        }
+    },[userData])
+    
     return (
-        <div>
+        <div className="">
             <Navbar/>
+            {showPopUp && isAuthenticated && (
+                <div className="absolute w-full h-32">
+
+                <div className="h-28 w-3/5 bg-gray-500 mx-auto mt-4 rounded-3xl p-4 text-white relative">
+                    <p>Todavía no has rellenado la información, vete a tu perfil o pulsa <Link to='/dashboard' className="text-blue-900 underline">aquí</Link></p>
+                    <button className="absolute right-4 top-4 text-red-500 bg-white rounded-full p-1 " onClick={()=>{setShowPopUp(false)}}>
+                        <svg fill="none" viewBox="0 0 15 15" height="1.5em" width="1.5em">
+                            <path
+                            fill="currentColor"
+                            fillRule="evenodd"
+                            d="M11.782 4.032a.575.575 0 10-.813-.814L7.5 6.687 4.032 3.218a.575.575 0 00-.814.814L6.687 7.5l-3.469 3.468a.575.575 0 00.814.814L7.5 8.313l3.469 3.469a.575.575 0 00.813-.814L8.313 7.5l3.469-3.468z"
+                            clipRule="evenodd"
+                            />
+                        </svg>
+                    </button>
+                </div>
+                
+            </div>
+            )}
+            <div className="bg-slate-200 h-full w-full">
+
+            </div>
         </div>
     )
 }
